@@ -1,2 +1,2 @@
-# Geolocation Based Land Status Platform
-The application will provide the user with information regarding the type of land and several other features
+# An Online Learning Platform
+The platform will provide the users with the opportunity to list their expertise and showcase their teaching skill. A platform where learners will meet experts.
