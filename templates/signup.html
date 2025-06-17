@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - LearnArc</title>
+  <link rel="stylesheet" href="css/signup.css" />
+</head>
+<body>
+  <div class="form-box">
+    <div class="logo-container">
+      <img src="webimages/learnarc.jpg" alt="LearnArc Logo" />
+    </div>
+    <h2>Create Account</h2>
+    <form id="signupForm" action="#" method="post" enctype="multipart/form-data">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+
+      <div class="input-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" required />
+      </div>
+
+      <div class="input-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" min="13" max="120" required />
+      </div>
+
+      <div class="input-group">
+        <label for="profile-picture">Profile Picture</label>
+        <input type="file" id="profile-picture" name="profile-picture" accept="image/*" required />
+      </div>
+
+      <div class="input-group checkbox">
+        <input type="checkbox" id="terms" name="terms" required />
+        <label for="terms">I agree to the Terms & Privacy</label>
+      </div>
+
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
