@@ -9,13 +9,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: dodgerblue;
+  background-image: url("backgroundlogo.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
+
 .login-box {
-  width: 350px;
+  width: 450px;
+  height: 500px;
   padding: 40px;
-  background: #fff;
+  background: dodgerblue;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   border-radius: 8px;
   text-align: center;
@@ -28,12 +32,13 @@ body {
 
 .logo-container img {
   width: 200px;
-  height: 200px;
+  height: 100px;
 }
 
 .login-box h2 {
-  margin-bottom: 30px;
-  color: #333;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  color: #black;
 }
 
 .user-box {
@@ -55,30 +60,30 @@ body {
   position: absolute;
   top: 10px;
   left: 5px;
-  color: #aaa;
+  color: white;
   transition: 0.3s;
 }
 
 .user-box input:focus + label,
 .user-box input:valid + label {
-  top: -15px;
-  font-size: 12px;
-  color: #3498db;
+  top: -12px;
+  font-size: 18px;
+  color: black;
 }
 
 button {
   width: 100%;
   padding: 12px;
-  background: #3498db;
+  background: #d8b2ff;
   border: none;
-  color: white;
+  color: black;
   font-size: 16px;
   cursor: pointer;
   border-radius: 4px;
 }
 
 button:hover {
-  background: #2980b9;
+  background: mediumpurple;
 }
 
 .extras {
