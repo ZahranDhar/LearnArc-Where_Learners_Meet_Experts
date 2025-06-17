@@ -1,17 +1,17 @@
 * { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
 body {
   display: flex; justify-content: center; align-items: center;
-  height:100vh; background:#d8b2ff;
+  height:100vh; background-image: url("backgroundlogo.jpg");
 }
 .form-box {
-  background:#fff; padding:30px; width:360px;
+  background:#d8b2ff; padding:20px; width:360px;
   border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);
   text-align:center;
 }
-.logo-container img { width:200px; margin-bottom:-20%; }
-h2 { color:#333; margin-bottom:20px; }
-.input-group { text-align:left; margin-bottom:15px; }
-.input-group label { display:block; margin-bottom:5px; color:#555; }
+.logo-container img { width:200px; margin-top:-13%; }
+h2 { color:#333; margin-bottom:-1px; }
+.input-group { text-align:left; margin-bottom:11px; }
+.input-group label { display:block; margin-bottom:2px; color:#555; }
 .input-group input[type="text"],
 .input-group input[type="email"],
 .input-group input[type="password"],

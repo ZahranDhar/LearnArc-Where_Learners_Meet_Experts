@@ -15,7 +15,9 @@ body { font-family: Arial, sans-serif; }
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   z-index: 100;
 }
-.logo { font-size: 1.5rem; font-weight: bold; color: #4500e2; }
+.logo img { 
+  width: 190px;
+ }
 .search-bar input {
   padding: 6px 10px;
   width: 240px;
@@ -33,7 +35,7 @@ body { font-family: Arial, sans-serif; }
 /* Sidebar */
 .sidebar {
   position: fixed;
-  top: 60px; /* height of topbar */
+  top: 90px; /* height of topbar */
   left: 0;
   width: 180px;
   height: calc(100vh - 60px);
@@ -43,12 +45,13 @@ body { font-family: Arial, sans-serif; }
 }
 .profile img {
   border-radius: 50%;
-  width: 80px;
+  height: 150px;
+  width: 150px;
   display: block;
   margin: 0 auto 12px;
 }
 .profile h3 { text-align: center; margin-bottom: 4px; }
-.profile p { text-align: center; font-size: 0.9rem; }
+/*.profile p { text-align: center; font-size: 0.9rem; }*/
 
 /* Main Content */
 .content {
@@ -59,12 +62,13 @@ body { font-family: Arial, sans-serif; }
 .content h2 { margin-bottom: 20px; color: #4500e2; }
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 50px;
 }
 .card {
   background: #f0edf8;
-  height: 120px;
+  height: 200px;
+  width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;

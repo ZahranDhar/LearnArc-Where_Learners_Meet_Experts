@@ -17,8 +17,8 @@ body { font-family: Arial, sans-serif; background: #f7f9fc; color: #333; }
 .logo {
   margin-top: -30px;
 margin-left: 460px;
- height: 200px;
- width:250px; }
+ height: 100px;
+ width:200px; }
 
 /* Sidebar Nav */
 .auth-navL {
