@@ -10,7 +10,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # Handle Open Website Request
 @app.route('/')
 def form():
-    return render_template("signup.html")
+    return render_template('login.html')
 
 # Handle Signup Request 
 @app.route('/signUp', methods=['POST'])

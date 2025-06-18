@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Login - LearnArc</title>
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
 </head>
 <body>
 
   <div class="login-box">
     <!-- Logo at the top -->
     <div class="logo-container">
-      <img src="learnarc.jpg" alt="LearnArc Logo">
+    <img src="{{ url_for('static', filename='webimages/learnarc.jpg') }}" alt="LearnArc Logo" />
     </div>
     <h2>Login</h2>
     <form id="loginForm" action="#" method="post">
