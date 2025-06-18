@@ -12,15 +12,16 @@
       <img src="learnarc.jpg" alt="LearnArc Logo" />
     </div>
     <h2>Create Account</h2>
-    <form id="signupForm" action="#" method="post" enctype="multipart/form-data">
-      <div class="input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required />
+    <form id="signupForm" action="/signUp" method="post" enctype="multipart/form-data">
+
+       <div class="input-group">
+        <label for="Name">Name</label>
+        <input type="text" id="name" name="name" required />
       </div>
 
       <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
       </div>
 
       <div class="input-group">
@@ -29,23 +30,13 @@
       </div>
 
       <div class="input-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" name="confirm-password" required />
-      </div>
-
-      <div class="input-group">
         <label for="age">Age</label>
         <input type="number" id="age" name="age" min="13" max="120" required />
       </div>
 
       <div class="input-group">
-        <label for="profile-picture">Profile Picture</label>
-        <input type="file" id="profile-picture" name="profile-picture" accept="image/*" required />
-      </div>
-
-      <div class="input-group checkbox">
-        <input type="checkbox" id="terms" name="terms" required />
-        <label for="terms">I agree to the Terms & Privacy</label>
+        <label for="profilepicture">Profile Picture</label>
+        <input type="file" id="profilepicture" name="profilepicture" accept="image/*" required />
       </div>
 
       <button type="submit" class="btn">Sign Up</button>

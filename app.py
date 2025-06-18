@@ -7,30 +7,25 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+# Handle Open Website Request
 @app.route('/')
 def form():
-    return render_template('index.html')
+    return render_template('signup.html')
 
-@app.route('/submit', methods=['POST'])
-def submit():
+# Handle Signup Request 
+@app.route('/signUp', methods=['POST'])
+def signUp():
     name = request.form['name']
     username = request.form['username']
     password = request.form['password']
     age = request.form['age']
     
-    # Handle profile picture
-    profile_pic = request.files['profilePic']
-    if profile_pic:
-        file_path = os.path.join(UPLOAD_FOLDER, profile_pic.filename)
-        profile_pic.save(file_path)
+    profilePicture = request.files['profilepicture']
+    if profilePicture:
+        file_path = os.path.join(UPLOAD_FOLDER, profilePicture.filename)
+        profilePicture.save(file_path)
     
-    return f"""
-        <h2>Form Submitted Successfully</h2>
-        <p><strong>Name:</strong> {name}</p>
-        <p><strong>Username:</strong> {username}</p>
-        <p><strong>Age:</strong> {age}</p>
-        <p><strong>Profile Picture Saved At:</strong> {file_path}</p>
-    """
+    return render_template('Home.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
