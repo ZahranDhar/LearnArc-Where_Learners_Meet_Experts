@@ -1,7 +1,7 @@
 * { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
 body {
   display: flex; justify-content: center; align-items: center;
-  height:100vh; background-image: url("webimages//backgroundlogo.jpg");
+  height:100vh; background-image: url('../webimages/backgroundlogo.jpg'); 
 }
 .form-box {
   background:#d8b2ff; padding:20px; width:360px;

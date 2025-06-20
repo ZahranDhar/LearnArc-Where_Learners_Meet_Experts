@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign Up - LearnArc</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}"/>
+  <link rel="stylesheet" href="../static/css/signup.css"/>
 </head>
 <body>
   <div class="form-box">
     <div class="logo-container">
-      <img src="{{ url_for('static', filename='webimages/learnarc.jpg') }}" alt="LearnArc Logo" />
+      <img src="../static/webimages/learnarc.jpg" alt="LearnArc Logo" />
     </div>
     <h2>Create Account</h2>
     <form id="signupForm" action="/signUp" method="post" enctype="multipart/form-data">
 
        <div class="input-group">
-        <label for="Name">Namebehzad</label>
+        <label for="Name">Name</label>
         <input type="text" id="name" name="name" required />
       </div>
 
