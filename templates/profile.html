@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta viewport="width=device-width, initial-scale=1"/>
+  <title>Profile Page - LearnArc</title>
+  <link rel="stylesheet" href="../static/css/profile.css"/>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="../static/webimages/learnarc.jpg" alt="LearnArc Logo"/></div>
+    <div class="search-container"><input type="text" placeholder="Search Bar"/></div>
+    <nav class="main-nav">
+      <a href="../templates/Home.html">Home</a>
+      <a href="#" class="active">Profile</a>
+      <a href="#">Chats</a>
+      <a href="#">Search</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <div class="profile-container">
+    <aside class="left-sidebar">
+      <button class="active">My Profile</button>
+      <ul>
+        <li><a href="#">Change Password</a></li>
+        <li><a href="#">Languages</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Log Out</a></li>
+      </ul>
+      <a class="delete" href="#">Delete Account</a>
+    </aside>
+
+    <main class="profile-main">
+      <div class="profile-header">
+        <div class="avatar"></div>
+        <div class="userinfo">
+          <h2>Username</h2>
+          <p>Niche</p>
+        </div>
+        <a href="#" class="edit-profile">Edit Profile</a>
+      </div>
+
+      <section class="personal-info">
+        <h3>Personal Information</h3>
+        <form>
+          <div class="row">
+            <input type="text" placeholder="First Name"/>
+            <input type="text" placeholder="Last Name"/>
+            <input type="text" placeholder="Age"/>
+          </div>
+          <div class="row add-niche">
+            <div id="niche-container">
+              <input type="text" name="niche" placeholder="Add Niche"/>
+            </div>
+            <button id="addNicheBtn" type="button">+</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('addNicheBtn').addEventListener('click', () => {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = 'niche';
+      input.placeholder = 'Add Niche';
+      document.getElementById('niche-container').appendChild(input);
+    });
+
+    document.querySelector('.edit-profile').addEventListener('click', e => {
+      e.preventDefault();
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      fileInput.onchange = ev => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          document.querySelector('.avatar').style.backgroundImage = `url('${reader.result}')`;
+        };
+        reader.readAsDataURL(ev.target.files[0]);
+      };
+      fileInput.click();
+    });
+  </script>
+</body>
+</html>
