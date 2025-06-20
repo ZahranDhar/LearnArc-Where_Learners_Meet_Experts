@@ -2,53 +2,81 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LearnArc Dashboard</title>
-  <link rel="stylesheet" href="Home.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Layout</title>
+  <link rel="stylesheet" href="C:\Users\behza\OneDrive\Desktop\LearnArc-Where_Learners_Meet_Experts\static\css\Home.css" />
 </head>
 <body>
 
-<header class="topbar">
-  <div class="logo">
-    <img src="learnarc.jpg">
-  </div>
-  <div class="search-bar">
-    <input type="text" placeholder="Search subject…">
-  </div>
-  <nav class="top-nav">
-    <a href="#">Home</a>
-    <a href="#">Profile</a>
-    <a href="#">Tutor</a>
-    <a href="#">Settings</a>
-  </nav>
-</header>
+  <header>
+    <button id="toggleBtn" class="toggle-btn">☰</button>
+    <div class="logo">
+      <img src="webimages/learnarc.jpg">
+    </div>
+    <nav class="top-nav">
+      <a href="#">Home</a>
+      <a href="#">Profile</a>
+      <a href="#">Chats</a>
+      <a href="#">Search</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="search"><input type="text" placeholder="Search…"></div>
+  </header>
 
-<aside class="sidebar">
-  <div class="profile">
-    <img src="https://travelsetu.com/apps/uploads/new_destinations_photos/destination/2023/12/13/2883d50f0a822bdc5fa011ad1e48b9f2_1000x1000.jpg" alt="Profile Pic">
-    <h2><b>Jane Doe<b></h2>
-      <br><br><br><br>
-    <h5>janedoe@123.com</h5>
-    <br>
-    <p>AGE:18<p>
-      <br>
-      <p>GENDER:M</p>
-  </div>
-</aside>
+  <aside id="sidebar" class="sidebar">
+    <div class="profile">
+      <img src="webimages/behzad.jpg" alt="Profile Photo">
+      <div class="name"><b>BEHZAD AYOUB</b></div><br>
+      <div class="username">@behzad123</div><br><br>
+      <div class="age">Age: 20</div>
+    </div>
+  </aside>
 
-<main class="content">
-  <h2>Subjects</h2>
-  <div class="grid">
-    <div class="card">Physics</div>
-    <div class="card">Chemistry</div>
-    <div class="card">Biology</div>
-    <div class="card">Math</div>
-    <div class="card">CompSci</div>
-    <div class="card">ECE</div>
-    <div class="card">Civil</div>
-    <div class="card">Electrical</div>
-  </div>
-</main>
+  <main id="main" class="main">
+    <h1>WELCOME TO <span style="color: mediumpurple;">Learn</span><span style="color: dodgerblue;">Arc</span></h1>
+
+    <section class="subject-grid">
+  <a href="#physics" class="subject-item">
+    <img src="https://via.placeholder.com/150" alt="Physics">
+    <p>PHYSICS</p>
+  </a>
+  <a href="#chemistry" class="subject-item">
+    <img src="https://via.placeholder.com/150" alt="Chemistry">
+    <p>CHEMISTRY</p>
+  </a>
+  <a href="#math" class="subject-item">
+    <img src="https://via.placeholder.com/150" alt="Math">
+    <p>MATH</p>
+  </a>
+  <a href="#cs" class="subject-item">
+    <img src="https://via.placeholder.com/150" alt="Computer Science">
+    <p>COMPUTER SCIENCE</p>
+  </a>
+  <a href="#civil" class="subject-item">
+    <img src="https://via.placeholder.com/150" alt="Civil Engineering">
+    <p>CIVIL</p>
+  </a>
+  <a href="#electrical" class="subject-item">
+    <img src="https://via.placeholder.com/150" alt="Electrical Engineering">
+    <p>ELECTRICAL</p>
+  </a>
+</section>
+
+  </main>
+
+
+  <script>
+    const btn = document.getElementById('toggleBtn');
+    const sidebar = document.getElementById('sidebar');
+    const main = document.getElementById('main');
+
+    btn.addEventListener('click', () => {
+      const isOpen = sidebar.classList.toggle('open');
+      main.classList.toggle('shift', isOpen);
+      btn.textContent = isOpen ? '×' : '☰';
+    });
+  </script>
 
 </body>
 </html>
