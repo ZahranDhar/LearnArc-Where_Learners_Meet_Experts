@@ -3,33 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Layout</title>
-  <link rel="stylesheet" href="C:\Users\behza\OneDrive\Desktop\LearnArc-Where_Learners_Meet_Experts\static\css\Home.css" />
+  <title>LearnArc Dashboard</title>
+  <link rel="stylesheet" href="../static/css/Home.css" />
 </head>
 <body>
 
   <header>
     <button id="toggleBtn" class="toggle-btn">☰</button>
     <div class="logo">
-      <img src="webimages/learnarc.jpg">
+      <img src="../static/webimages/learnarc.jpg" alt="Logo">
     </div>
     <nav class="top-nav">
-      <a href="#">Home</a>
+      <a href="#" style="background-color: dodgerblue;">Home</a>
       <a href="#">Profile</a>
       <a href="#">Chats</a>
       <a href="#">Search</a>
-      <a href="#">About Us</a>
+      <a href="#" style="margin-left: 600px;">About Us</a>
       <a href="#">Contact</a>
     </nav>
-    <div class="search"><input type="text" placeholder="Search…"></div>
+    
   </header>
 
   <aside id="sidebar" class="sidebar">
     <div class="profile">
-      <img src="webimages/behzad.jpg" alt="Profile Photo">
-      <div class="name"><b>BEHZAD AYOUB</b></div><br>
-      <div class="username">@behzad123</div><br><br>
-      <div class="age">Age: 20</div>
+      <img src="../static/webimages/behzad.jpg" alt="Profile Photo">
+      <div class="name"><b>BEHZAD AYOUB</b></div><br><br>
+      <div class="username"><h2>@behzad123</h2></div><br>
+      <div class="age"><h2>Age: 20</h2> </div>
     </div>
   </aside>
 
@@ -37,34 +37,32 @@
     <h1>WELCOME TO <span style="color: mediumpurple;">Learn</span><span style="color: dodgerblue;">Arc</span></h1>
 
     <section class="subject-grid">
-  <a href="#physics" class="subject-item">
-    <img src="https://via.placeholder.com/150" alt="Physics">
-    <p>PHYSICS</p>
-  </a>
-  <a href="#chemistry" class="subject-item">
-    <img src="https://via.placeholder.com/150" alt="Chemistry">
-    <p>CHEMISTRY</p>
-  </a>
-  <a href="#math" class="subject-item">
-    <img src="https://via.placeholder.com/150" alt="Math">
-    <p>MATH</p>
-  </a>
-  <a href="#cs" class="subject-item">
-    <img src="https://via.placeholder.com/150" alt="Computer Science">
-    <p>COMPUTER SCIENCE</p>
-  </a>
-  <a href="#civil" class="subject-item">
-    <img src="https://via.placeholder.com/150" alt="Civil Engineering">
-    <p>CIVIL</p>
-  </a>
-  <a href="#electrical" class="subject-item">
-    <img src="https://via.placeholder.com/150" alt="Electrical Engineering">
-    <p>ELECTRICAL</p>
-  </a>
-</section>
-
+      <a href="#physics" class="subject-item">
+        <img src="https://via.placeholder.com/150" alt="Physics">
+        <p>PHYSICS</p>
+      </a>
+      <a href="#chemistry" class="subject-item">
+        <img src="https://via.placeholder.com/150" alt="Chemistry">
+        <p>CHEMISTRY</p>
+      </a>
+      <a href="#math" class="subject-item">
+        <img src="https://via.placeholder.com/150" alt="Math">
+        <p>MATH</p>
+      </a>
+      <a href="#cs" class="subject-item">
+        <img src="https://via.placeholder.com/150" alt="Computer Science">
+        <p>COMPUTER SCIENCE</p>
+      </a>
+      <a href="#civil" class="subject-item">
+        <img src="https://via.placeholder.com/150" alt="Civil Engineering">
+        <p>CIVIL</p>
+      </a>
+      <a href="#electrical" class="subject-item">
+        <img src="https://via.placeholder.com/150" alt="Electrical Engineering">
+        <p>ELECTRICAL</p>
+      </a>
+    </section>
   </main>
-
 
   <script>
     const btn = document.getElementById('toggleBtn');
