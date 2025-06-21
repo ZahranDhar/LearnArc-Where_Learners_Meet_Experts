@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
 import os
 from pymongo import MongoClient
 import bcrypt
@@ -8,12 +8,14 @@ import boto3
 s3 = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='', region_name='eu-north-1' )
 
 # Connecting to MongoDB
-client = MongoClient("mongodb+srv://zahrannazirdhar:@cluster.wojbkyb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster")
+client = MongoClient("")
 db = client["LearnArc-StorageMongoDB"]
-collection = db["Profiles"]
+profiles = db["Profiles"]
+expertises = db["Expertises"]
 
 # Handle Open Website Request
 app = Flask(__name__)
+app.secret_key= ''
 @app.route('/')
 def welcome():
 
@@ -34,6 +36,10 @@ def uploadProfilePictureToAWS(fileObj):
 @app.route('/signUp', methods=['POST'])
 def signUp():
 
+    # Check if username is available
+    if(profiles.find_one({"username":request.form['username']}) is not None):
+        return render_template('signup.html')
+
     # Secure Password
     securepassword = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
 
@@ -42,9 +48,37 @@ def signUp():
     if file:
         url = uploadProfilePictureToAWS(file)
 
-    collection.insert_one({"name": request.form['name'], "username": request.form['username'],"age": request.form['age'],"securepassword": securepassword,"profilepictureurl": url})
+    profiles.insert_one({"name": request.form['name'], "username": request.form['username'],"age": request.form['age'],"securepassword": securepassword,"profilepictureurl": url,"expertiseIDs":[]})
     
-    return render_template('Home.html')
+    session['username']=request.form['username']
+    return render_template('expertise.html')
+
+@app.route('/login',methods=['POST'])
+def logIn():
+
+    # Verify Password
+    if(profiles.find_one({"username":request.form['username']}) is not None):
+
+        user=profiles.find_one({"username":request.form['username']})    
+
+        if(bcrypt.checkpw(request.form['password'].encode('utf-8'), user.get("securepassword"))):
+            
+            session['username']=request.form['username']
+            return render_template('expertise.html')
+        
+
+@app.route('/add', methods=['POST'])
+def addExpertise():
+
+    result=expertises.insert_one({"course":request.form['course'],"title":request.form['title'],"description":request.form['description'],"rating":0})
+    profiles.update_one({"username":session.get('username')},{"$push":{"expertiseIDs":result.inserted_id}})
+
+    return render_template('home.html')
+
+
+
+
+
 
 # Runs app
 if __name__ == '__main__':
