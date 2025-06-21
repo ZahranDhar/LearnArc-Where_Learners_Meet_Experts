@@ -63,7 +63,6 @@
       </a>
     </section>
   </main>
-
   <script>
     const btn = document.getElementById('toggleBtn');
     const sidebar = document.getElementById('sidebar');
@@ -75,6 +74,10 @@
       btn.textContent = isOpen ? '×' : '☰';
     });
   </script>
+
+<script src="{{ url_for('static', filename='js/Home.js') }}"></script>
+
+
 
 </body>
 </html>
