@@ -27,7 +27,7 @@ socketio = SocketIO(app)  # Enables SocketIO support
 @app.route('/')
 def welcome():
 
-    return render_template('signup.html')
+    return render_template("signup.html")
 
 # Handle Signup Request 
 
@@ -57,9 +57,9 @@ def signUp():
         url = uploadProfilePictureToAWS(file)
 
     profiles.insert_one({"name": request.form['name'], "username": request.form['username'],"age": request.form['age'],"securepassword": securepassword,"profilepictureurl": url,"expertiseIDs":[], "chatUsernames":[]})
-    
+    user=profiles.find_one({"username":request.form['username']})
     session['username']=request.form['username']
-    return render_template('expertise.html')
+    return render_template('Home.html',user=user)
 
 @app.route('/login',methods=['POST'])
 def logIn():
@@ -72,7 +72,7 @@ def logIn():
         if(bcrypt.checkpw(request.form['password'].encode('utf-8'), user.get("securepassword"))):
             
             session['username']=request.form['username']
-            return render_template('expertise.html')
+            return render_template('Home.html',user=user)
         
 
 @app.route('/add', methods=['POST'])
@@ -141,7 +141,6 @@ def chat(friend_username):
 
 @app.route('/home')
 def home():
-    session['username'] = 'aidahrufai'
     current_user = users_col.find_one({"username": session['username']})
     all_users = list(users_col.find())
 
@@ -185,6 +184,17 @@ def handle_send_message(data):
 
 def get_room_name(user1, user2):
     return "-".join(sorted([user1, user2]))
+
+# Display Profile (Visiting and Personal)
+@app.route('/profile/<username>',methods=['POST'])
+def getProfile(username):
+
+    # Retrieve user data from MongoDB
+    user=profiles.find_one({"username":username})
+    expertiseIDs=user.get("expertiseIDs",[])
+    expertises=list(expertises.find({"_id":{"$in":expertiseIDs}}))
+    return render_template("profile.html",user=user,expertises=expertises)
+
 
 # Run the app
 if __name__ == '__main__':
