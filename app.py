@@ -56,7 +56,7 @@ def signUp():
     if file:
         url = uploadProfilePictureToAWS(file)
 
-    profiles.insert_one({"name": request.form['name'], "username": request.form['username'],"age": request.form['age'],"securepassword": securepassword,"profilepictureurl": url,"expertiseIDs":[]})
+    profiles.insert_one({"name": request.form['name'], "username": request.form['username'],"age": request.form['age'],"securepassword": securepassword,"profilepictureurl": url,"expertiseIDs":[], "chatUsernames":[]})
     
     session['username']=request.form['username']
     return render_template('expertise.html')
