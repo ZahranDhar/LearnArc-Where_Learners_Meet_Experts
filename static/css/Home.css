@@ -102,15 +102,12 @@ header {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   width: 100%;
-  height: calc(100vh - 100px);
+  height: 500px;
   padding: 20px;
-  gap: 20px;
+  gap: 2%;
   background: #c1a5f1;
   text-align: center;
   box-sizing: border-box;
-}
-.subject-grid a{
-  background-color: white;
 }
 
 .subject-item {
@@ -131,15 +128,14 @@ header {
 }
 
 .subject-item img {
-  width: 300px;
-  height: 120px;
-  /* border-radius: 50%; */
+  width: 90%;
+  height: 60%;
   object-fit: cover;
 }
 
 .subject-item p {
   margin-top: 10px;
-  color: black;
+  color: white;
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 1px;
