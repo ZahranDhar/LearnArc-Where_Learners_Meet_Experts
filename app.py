@@ -24,12 +24,22 @@ app = Flask(__name__)
 app.secret_key= ''
 socketio = SocketIO(app)  # Enables SocketIO support
 
+#routes
+
 @app.route('/')
 def welcome():
 
-    return render_template("signup.html")
+    return render_template("welcome.html")
+
 
 # Handle Signup Request 
+@app.route('/signup')
+def signup_page():
+    return render_template("signup.html")
+
+@app.route('/login')
+def login_page():
+    return render_template("login.html")
 
 # Uploads Profile picture to AWS
 def uploadProfilePictureToAWS(fileObj):
@@ -73,6 +83,7 @@ def logIn():
             
             session['username']=request.form['username']
             return render_template('Home.html',user=user)
+            return render_template("login.html")
         
 
 @app.route('/add', methods=['POST'])
@@ -85,10 +96,7 @@ def addExpertise():
 
 @app.route('/chat/<friend_username>')
 def chat(friend_username):
-    # Simulate login (for testing)
-    if 'username' not in session:
-        session['username'] = 'aidahrufai'  # 👈 Replace with valid test user
-
+    
     # Get the current logged-in user
     current_user = users_col.find_one({"username": session['username']})
     if not current_user:
@@ -151,6 +159,37 @@ def home():
 
     return render_template('Home.html', current_user=current_user, users=all_users)
 
+#chat menu
+@app.route('/chat_menu')
+def chat_menu():
+    if 'username' not in session:
+        return redirect(url_for('welcome'))
+
+    current_username = session['username']
+
+    # Fetch all chats involving current user
+    conversations = chats_col.find({
+        "$or": [
+            {"sender": current_username},
+            {"receiver": current_username}
+        ]
+    })
+
+    talked_to = set()
+    for convo in conversations:
+        # Avoid self-chats
+        if convo['sender'] != current_username:
+            talked_to.add(convo['sender'])
+        if convo['receiver'] != current_username:
+            talked_to.add(convo['receiver'])
+
+    # Avoid empty $in query
+    if not talked_to:
+        talked_to_users = []
+    else:
+        talked_to_users = list(users_col.find({"username": {"$in": list(talked_to)}}))
+
+    return render_template('chat_menu.html', users=talked_to_users, current_user=current_username)
 # WebSocket Events
 @socketio.on('join_chat')
 def on_join(data):
@@ -199,5 +238,3 @@ def getProfile(username):
 # Run the app
 if __name__ == '__main__':
     socketio.run(app, debug=True)
-
-
