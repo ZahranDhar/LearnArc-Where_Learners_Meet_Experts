@@ -1,195 +1,86 @@
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
-body { background:#f4edff; color:#333; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+body { background:mediumpurple; color:#333; }
 
 /* Header */
-header { display:flex; align-items:center; padding:0 30px; background: white; border-bottom:1px solid #ddd; }
-.logo img { height:60px; margin-right:30px; }
-/* .search-container input {
-  width:300px; padding:10px; font-size:16px;
-  border:2px solid #4d7cfe; border-radius:30px; text-align:center; margin-right:auto;
-} */
-.main-nav {
+header { display:flex; align-items:center; padding:10px 30px; background:#fff; border-bottom:1px solid #ddd; }
+.logo img { height:50px; margin-right:20px; }
+.main-nav a { text-decoration:none; color:black; font-size:16px; padding: 23px 5px;}
+.main-nav :hover{ background-color: #ccc; width: 100px;}
+.main-nav a.active { background:dodgerblue; color:#fff; padding:25px 8px; }
+
+/* Layout */
+.profile-container { display:flex; margin-top:20px; }
+.left-sidebar { width:240px; background:#fff; padding:20px;background-image: url('../webimages/backgroundlogo.jpg');  }
+.left-sidebar button.active { width:100%; padding:10px; background:dodgerblue; color:#fff; border:none; border-radius:6px; margin-bottom:15px; }
+.left-sidebar ul { list-style:none; margin:20px 0;font-size: larger;font-weight: bold; }
+.left-sidebar ul :hover{ text-decoration: underline; color: dodgerblue;}
+.left-sidebar ul li { margin-bottom:12px; display:flex; align-items:center; }
+.left-sidebar ul a { text-decoration:none; color:black; }
+.left-sidebar ul select { margin-left: auto; padding:4px; }
+.delete-account-btn { width:100%; padding:10px; background:#e74c3c; color:#fff; border:none; border-radius:4px; cursor:pointer; }
+
+/* Modal */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; }
+.modal-content { background:#fff; padding:20px; border-radius:8px; width:360px; max-width:90%; text-align:center; position:relative; }
+.close { position:absolute; top:12px; right:12px; cursor:pointer; font-size:20px; }
+.modal-buttons { display:flex; gap:10px; margin-top:20px; }
+.cancel-btn, .delete-btn { flex:1; padding:10px; border:none; border-radius:6px; cursor:pointer; }
+.cancel-btn { background:#ccc; color:#333; }
+.delete-btn { background:#e74c3c; color:#fff; }
+
+/* Profile main */
+.profile-main { flex:1; background:#efe5ff; padding:20px; border-radius:10px; margin-left:20px; }
+.profile-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+.avatar { width:80px; height:80px; background:#fff center/cover no-repeat; border:2px solid #ccc; border-radius:50%; }
+.userinfo h2 { color:#2b61da; font-size:20px; }
+.userinfo p { color:#9063e1; font-size:16px; }
+.edit-profile { font-size:14px; color:#8c5edf; text-decoration:none; }
+
+/* Personal info */
+.personal-info h3 { background:#a288e3; color:#fff; padding:8px 16px; border-radius:6px; display:inline-block; margin-bottom:16px; }
+.row { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.row input[readonly] { background:#e9ecef; border:1px solid #aaa; padding:6px; border-radius:4px; }
+
+/* Expertise section */
+.field-group {
+  margin-bottom: 12px;
   display: flex;
-  flex: 1;
-}
-.main-nav a {
-  padding: 0 20px;
-  line-height: 60px;
-  color: #333;
-  text-decoration: none;
-  font-size: 16px;
-}
-.main-nav a:hover,
-.main-nav a.active {
-  background: #ddd;
-}
-
-/* Profile Container */
-.profile-container { display:flex; margin-top:30px; }
-
-/* Sidebar */
-.left-sidebar { width:220px; padding:20px; }
-.left-sidebar button.active {
-  display:block; width:100%; padding:10px;
-  background: dodgerblue; color:#fff; border:none; border-radius:12px; margin-bottom:20px;
-}
-.left-sidebar ul { list-style:none; margin:20px 0; }
-.left-sidebar li { margin-bottom:12px; }
-.left-sidebar li a { text-decoration:none; color: dodgerblue; font-size:16px; }
-.left-sidebar li :hover{ text-decoration: underline;color: black; }
-/* Trigger Button */
-
-
-
-.language-selector {
-  margin-top: 1px;
-  background: #f4edff;
-  border-radius: 8px;
-}
-
-.language-selector li {
-  font-size: 18px;
-  margin-bottom: 18px;
-  color: dodgerblue;
-}
-.language-selector :hover{ text-decoration: underline; }
-
-/* Custom styled select using appearance:none */
-.custom-select {
-  margin-top: -14px;
-  position: relative;
-  width: 200px;
-}
-
-.custom-select select {
-  appearance: none;
-  width: 100%;
-  padding: 5px 10px;
-  font-size: 16px;
-  border: 1px solid dodgerblue;
-  border-radius: 4px;
-  background-color: #f4edff;
-  cursor: pointer;
-}
-
-/* Add a custom arrow using a pseudo-element */
-.custom-select::after {
-  content: "▼";
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: mediumpurple;
-}
-
-
-
-
-.delete-account-btn {
-  background-color: #e74c3c;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-/* Modal Background */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  gap: 10px;
   align-items: center;
-  justify-content: center;
 }
-
-/* Modal Box */
-.modal-content {
-  background: #fff;
-  padding: 24px;
-  border-radius: 6px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  position: relative;
+.field-group label {
+  width: 100px;
+  font-weight: bold;
 }
-
-/* Close "X" Button */
-.modal-content .close {
-  position: absolute;
-  top: 12px; right: 12px;
-  font-size: 24px;
-  cursor: pointer;
+.field-group input,
+.field-group textarea {
+  flex: 1;
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
 }
+.field-group textarea { min-height: 60px; resize: vertical; }
 
-/* Buttons Container */
-.modal-buttons {
-  margin-top: 20px;
+.expertise-controls {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
 }
-
-/* Cancel / Delete Buttons */
-.cancel-btn,
-.delete-btn {
-  padding: 10px 20px;
+.expertise-controls button {
+  padding: 6px 10px;
+  background: #4d7cfe;
+  color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-.cancel-btn {
-  background: #ccc;
-  color: #333;
-}
-.delete-btn {
-  background: #e74c3c;
+#addExpertiseBtn {
+  background: #0a6cff;
   color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-
-/* Main Profile Section */
-.profile-main {
-  flex:1; background:#efe5ff; padding:30px; border-radius:10px; margin-left:20px;
-}
-.profile-header {
-  display:flex; align-items:center; justify-content:space-between; margin-bottom:30px;
-}
-.avatar {
-  width:100px; height:100px;
-  background:#fff center/cover no-repeat;
-  border:2px solid #ccc; border-radius:50%;
-}
-.userinfo { flex:1; margin-left:20px; }
-.userinfo h2 { color:#2b61da; font-size:24px; }
-.userinfo p { color:#9063e1; font-size:18px; }
-.edit-profile { color:#8c5edf; text-decoration:none; font-size:16px; }
-
-/* Personal Info Form */
-.personal-info h3 {
-  background:#a288e3; color:white; padding:10px 20px;
-  border-radius:8px; display:inline-block; margin-bottom:20px;
-}
-form .row { display:flex; gap:15px; margin-bottom:15px; }
-form input {
-  flex:1; padding:12px; font-size:14px;
-  background:#f8f4ff; border:none; border-bottom:2px solid #c5a9f9; border-radius:8px;
-}
-input[readonly] {
-  background: mediumpurple;
-  border: 1px solid #ccc;
-  color: white;
-}
-
-
-.add-niche button {
-  width:40px; font-size:20px;
-  background:none; border:2px solid #c5a9f9;
-  color:#7e3ff2; border-radius:50%; cursor:pointer;
-}
-textarea{
-  width: 200px;height: 50;font-size:small;margin-left: 5px; background-color: mediumpurple;color: white;
-}
