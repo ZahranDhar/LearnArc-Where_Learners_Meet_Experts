@@ -8,7 +8,7 @@ body {
   border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);
   text-align:center;
 }
-.logo-container img { width:200px; margin-top:-13%; }
+.logo-container img { width:200px; margin-top:30%; }
 h2 { color:#333; margin-bottom:-1px; }
 .input-group { text-align:left; margin-bottom:11px; }
 .input-group label { display:block; margin-bottom:2px; color:#555; }
