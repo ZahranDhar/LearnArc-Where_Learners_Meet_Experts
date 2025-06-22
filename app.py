@@ -8,8 +8,7 @@ from pymongo import MongoClient
 from flask_socketio import SocketIO, emit, join_room
 
 # Connecting to AWS Server
-s3 = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='', region_name='eu-north-1' )
-
+s3 = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='', region_name='eu-north-1')
 # Connecting to MongoDB
 client = MongoClient("")
 db = client["LearnArc-StorageMongoDB"]
@@ -21,7 +20,7 @@ chats_col = db["Chats"]        # You should create this collection in MongoDB
 
 # Handle Open Website Request
 app = Flask(__name__)
-app.secret_key= ''
+app.secret_key = ''
 socketio = SocketIO(app)  # Enables SocketIO support
 
 #routes
@@ -177,13 +176,11 @@ def chat_menu():
 
     talked_to = set()
     for convo in conversations:
-        # Avoid self-chats
         if convo['sender'] != current_username:
             talked_to.add(convo['sender'])
         if convo['receiver'] != current_username:
             talked_to.add(convo['receiver'])
 
-    # Avoid empty $in query
     if not talked_to:
         talked_to_users = []
     else:

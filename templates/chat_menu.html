@@ -1,21 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Chat Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
 </head>
 <body>
-    <h2>People You’ve Chatted With</h2>
-
-    <ul>
-        {% for user in users %}
-            <li>
-                <a href="{{ url_for('chat', friend_username=user.username) }}">
-                    {{ user.name }} ({{ user.username }})
+    <div id="chat-container">
+        <div class="sidebar">
+            <div class="sidebar-user">
+                <img src="{{ current_user.profilepictureurl }}" alt="Your Picture">
+                <span>{{ current_user.username }}</span>
+            </div>
+            <h3 style="color: white; margin-top: 1rem;">Your Chats</h3>
+            {% for user in users %}
+                <a href="{{ url_for('chat', friend_username=user.username) }}" class="chat-link">
+                    <div class="sidebar-user">
+                        <img src="{{ user.profilepictureurl }}" alt="Partner Picture">
+                        <span>{{ user.username }}</span>
+                    </div>
                 </a>
-            </li>
-        {% endfor %}
-    </ul>
+            {% else %}
+                <p style="color: white;">No chats yet.</p>
+            {% endfor %}
+        </div>
 
-    <a href="{{ url_for('home') }}">Back to Home</a>
+        <div class="chat-window">
+            <div id="chat-header">
+                <h2>Select a chat from the left</h2>
+            </div>
+            <div id="chat-body">
+                <!-- Empty by default, chat loads after selection -->
+            </div>
+        </div>
+    </div>
 </body>
 </html>

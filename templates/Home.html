@@ -16,7 +16,7 @@
     <nav class="top-nav">
       <a href="#" style="background-color: dodgerblue; color: white;">Home</a>
       <a href="../templates/profile.html">Profile</a>
-      <a href="#">Chats</a>
+      <a href="{{ url_for('chat_menu') }}">Chats</a>
       <a href="#">Search</a>
       <a href="#" style="margin-left: 600px;">About Us</a>
       <a href="#">Contact</a>
@@ -32,6 +32,7 @@
       <div class="age"><h2>Age: {{user.age}}</h2> </div>
     </div>
   </aside>
+
 
   <main id="main" class="main">
     <h1> <span style="color: indigo;">Learn</span><span style="color: dodgerblue;">Arc</span></h1>
@@ -83,3 +84,4 @@
 
 </body>
 </html>
+
