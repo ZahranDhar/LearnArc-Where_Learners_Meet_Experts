@@ -2,56 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta viewport="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Profile Page - LearnArc</title>
   <link rel="stylesheet" href="../static/css/profile.css"/>
 </head>
 <body>
+
   <header>
     <div class="logo"><img src="../static/webimages/learnarc.jpg" alt="LearnArc Logo"/></div>
-    <!-- <div class="search-container"><input type="text" placeholder="Search Bar"/></div> -->
     <nav class="main-nav">
-      <a href="../templates/Home.html">Home</a>
-      <a href="#" class="active" style="background-color: dodgerblue;color: whiTE;">Profile</a>
-      <a href="#">Chats</a>
-      <a href="#">Search</a>
-      <a href="#" style="margin-left: 480px;">About Us</a>
-      <a href="#">Contact</a>
-    </nav>
+  <a href="../templates/Home.html" data-i18n-key="home">Home</a>
+  <a href="#" data-i18n-key="profile" class="active" style="background-color: dodgerblue;">Profile</a>
+  <a href="#" data-i18n-key="chats">Chats</a>
+  <a href="#" data-i18n-key="search">Search</a>
+  <a href="#" data-i18n-key="aboutUs" style="margin-left: 600px;">About Us</a>
+  <a href="#" data-i18n-key="contact">Contact</a>
+</nav>
   </header>
 
   <div class="profile-container">
     <aside class="left-sidebar">
-      <button class="active" >My Profile</button>
+      <button class="active" data-i18n-key="myProfile">My Profile</button>
       <ul>
-        <li><a href="../templates/change_password.html">Change Password</a></li>
-  <section class="language-selector"><li style="color: dodgerblue;">Languages</li></section>
-  <div class="custom-select">
-    <select id="languageSelect" style="color: mediumpurple;">
-      <option value="en" selected>English</option>
-      <option value="hi">हिन्दी</option>
-    </select>
-  </div>
-</section>
-
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Help</a></li>
-        <li><a href="#">Log Out</a></li>
+        <li><a href="../templates/change_password.html" data-i18n-key="changePwd">Change Password</a></li>
+        <li>
+          <label data-i18n-key="language">Language:</label>
+          <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </li>
+        <li><a href="#" data-i18n-key="privacy">Privacy</a></li>
+        <li><a href="#" data-i18n-key="help">Help</a></li>
+        <li><a href="#" data-i18n-key="logout">Logout</a></li>
       </ul>
-      <button onclick="openModal()" class="delete-account-btn" data-i18n-key="deleteAcct">Delete Account</button>
+      <button type="button" onclick="openModal()" class="delete-account-btn" data-i18n-key="deleteAcct">Delete Account</button>
 
-<div id="deleteModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2 data-i18n-key="deleteTitle">Delete Account</h2>
-    <p data-i18n-key="deleteConfirm">Are you sure you want to delete your account? This action cannot be undone.</p>
-    <div class="modal-buttons">
-      <button type="button" class="cancel-btn"data-i18n-key="cancelBtn" onclick="closeModal()">Cancel</button>
-      <button type="button" class="delete-btn"data-i18n-key="confirmBtn" onclick="confirmDelete()">Delete</button>
-    </div>
-  </div>
-</div>
 
+      <!-- Delete Modal -->
+      <div id="deleteModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2 data-i18n-key="deleteTitle">Delete Account</h2>
+          <p data-i18n-key="deleteConfirm">Are you sure you want to delete your account? This action cannot be undone.</p>
+          <div class="modal-buttons">
+            <button type="button" class="cancel-btn" data-i18n-key="cancelBtn" onclick="closeModal()">Cancel</button>
+            <button type="button" class="delete-btn" data-i18n-key="confirmBtn" onclick="confirmDelete()">Delete</button>
+          </div>
+        </div>
+      </div>
     </aside>
 
     <main class="profile-main">
@@ -64,112 +63,116 @@
         <a href="#" class="edit-profile" data-i18n-key="editProfile">Edit Profile</a>
       </div>
 
-     <section class="personal-info">
-  <h3 data-i18n-key="personalInfo">Personal Information</h3>
-  <form>
-    <div class="row">
-      <label style="margin-top: 8px;"><b data-i18n-key="firstNameLabel">First name:</b></label>
-      <input type="text"  placeholder="First Name" readonly value="BEHZAD" />
-      <label style="margin-top: 8px;"><b data-i18n-key="lastNameLabel">Last name:</b></bLast></label>
-      <input type="text" placeholder="Last Name" readonly value="AYOUB" />
-      <label style="margin-top: 8px;"><b data-i18n-key="ageLabel">Age:</b></label>
-      <input type="text" placeholder="Age" readonly value="20" />
-    </div>
-    <div class="row add-niche">
-      <div id="niche-container">
-        <textarea >TIME COMPLEXITY (DAA)/COMPUTER SCIENCE</textarea>
+      <section class="personal-info">
+        <h3 data-i18n-key="personalInfo">Personal Information</h3>
+        <div class="row">
+          <label><b data-i18n-key="firstNameLabel">First name:</b></label>
+          <input type="text" readonly value="BEHZAD"/>
+          <label><b data-i18n-key="lastNameLabel">Last name:</b></label>
+          <input type="text" readonly value="AYOUB"/>
+          <label><b data-i18n-key="ageLabel">Age:</b></label>
+          <input type="text" readonly value="20"/>
+        </div>
+
+        <section class="expertise-section">
+  <h3 data-i18n-key="expertiseAreas">Expertise Areas</h3>
+  <div id="expertise-container">
+    <!-- Example existing expertise -->
+    <div class="expertise-item">
+      <div class="field-group">
+        <label data-i18n-key="subjectLabel">Subject:</label>
+        <input type="text" readonly value="Computer Science">
       </div>
-      <button id="addNicheBtn" type="button">+</button>
+      <div class="field-group">
+        <label data-i18n-key="topicLabel">Topic:</label>
+        <input type="text" readonly value="Time Complexity">
+      </div>
+      <div class="field-group">
+        <label data-i18n-key="descriptionLabel">Description:</label>
+        <textarea readonly>Understanding Big‑O, Big‑Theta, Big‑Omega.</textarea>
+      </div>
+      <div class="expertise-controls">
+        <button type="button" class="edit-btn" data-i18n-key="edit">Edit</button>
+        <button type="button" class="save-btn" style="display:none;">Save</button>
+      </div>
     </div>
-  </form>
+  </div>
+  <button type="button" id="addExpertiseBtn" data-i18n-key="addExpertise">+ Add Expertise</button>
 </section>
 
     </main>
   </div>
 
-  <script>
-    document.getElementById('addNicheBtn').addEventListener('click', () => {
-      const input = document.createElement('textarea');
-      input.name = 'niche';
-      input.placeholder = 'Add Niche';
-      document.getElementById('niche-container').appendChild(input);
-    });
-
-    document.querySelector('.edit-profile').addEventListener('click', e => {
-      e.preventDefault();
-      const fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.accept = 'image/*';
-      fileInput.onchange = ev => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          document.querySelector('.avatar').style.backgroundImage = `url('${reader.result}')`;
-        };
-        reader.readAsDataURL(ev.target.files[0]);
-      };
-      fileInput.click();
-    });
-
-    
-    function openModal() {
-  document.getElementById('deleteModal').style.display = 'flex';
-}
-
-function closeModal() {
-  document.getElementById('deleteModal').style.display = 'none';
-}
-
-function confirmDelete() {
-  // TODO: Implement the delete action (e.g., form submission or backend request)
-  alert('Your account has been deleted.');
-  closeModal();
-}
-
-// Close when clicking outside the modal box
-window.onclick = event => {
-  if (event.target.id === 'deleteModal') closeModal();
-};
-
-
-  // document.getElementById('languageSelect').addEventListener('change', e => {
-  //   const lang = e.target.value;
-  //   alert(`Language changed to: ${lang.toUpperCase()}`);
-  //   // TODO: integrate backend or i18n logic
-  // });
-
- 
-
+  <script >
+    // Translation data
 const translations = {
   en: {
-    username: "Username",
-    niche: "Niche",
-    editProfile: "Edit Profile",
-    firstNameLabel: "First name:",
-    lastNameLabel: "Last name:",
-    ageLabel: "Age:",
-    personalInfo: "Personal Information",
+    myProfile: "My Profile",
+    changePwd: "Change Password",
+    language: "Language:",
     deleteAcct: "Delete Account",
     deleteTitle: "Delete Account",
     deleteConfirm: "Are you sure you want to delete your account? This action cannot be undone.",
     cancelBtn: "Cancel",
-    confirmBtn: "Delete"
+    confirmBtn: "Delete",
+    username: "Username",
+    niche: "Niche",
+    editProfile: "Edit Profile",
+    personalInfo: "Personal Information",
+    firstNameLabel: "First name:",
+    lastNameLabel: "Last name:",
+    ageLabel: "Age:",
+    expertiseAreas: "Expertise Areas",
+    subjectLabel: "Subject:",
+    topicLabel: "Topic:",
+    descriptionLabel: "Description:",
+    privacy: "Privacy",
+    help: "Help", 
+    logout: "Logout",
+    home: "Home",
+    profile: "Profile",
+    chats: "Chats",
+    search: "Search",
+    aboutUs: "About Us",
+    contact: "Contact",
+    edit: "Edit",
+    addExpertise: "+ Add Expertise"
   },
   hi: {
+    myProfile: "मेरी प्रोफ़ाइल",
+    changePwd: "पासवर्ड बदलें",
+    language: "भाषा:",
+    deleteAcct: "खाता हटाएं",
+    deleteTitle: "खाता हटाएं",
+    deleteConfirm: "क्या आप वाकई अपना खाता हटाना चाहते हैं? यह पूर्ववत नहीं हो सकता।",
+    cancelBtn: "रद्द करें",
+    confirmBtn: "हटाएं",
     username: "उपयोगकर्ता नाम",
     niche: "विशेषता",
     editProfile: "प्रोफ़ाइल संपादित करें",
+    personalInfo: "व्यक्तिगत जानकारी",
     firstNameLabel: "पहला नाम:",
     lastNameLabel: "अंतिम नाम:",
     ageLabel: "उम्र:",
-    personalInfo: "व्यक्तिगत जानकारी",
-    deleteAcct: "खाता हटाएं",
-    deleteTitle: "खाता हटाएं",
-    deleteConfirm: "क्या आप वाकई अपना खाता हटाना चाहते हैं? यह कार्रवाई पूर्ववत नहीं हो सकती।",
-    cancelBtn: "रद्द करें",
-    confirmBtn: "हटाएं"
+    expertiseAreas: "विशेषज्ञता क्षेत्र",
+    subjectLabel: "विषय:",
+    topicLabel: "विषय-वस्तु:",
+    descriptionLabel: "विवरण:",
+    privacy: "गोपनीयता",
+    help: "सहायता",
+    logout: "लॉगआउट",
+    home: "होम",
+    profile: "मेरी प्रोफ़ाइल",
+    chats: "चैट्स",
+    search: "खोज",
+    aboutUs: "हमारे बारे में",
+    contact: "संपर्क",
+    edit: "संपादित करें",
+    addExpertise: "विशेषज्ञता जोड़ें"
   }
 };
 
+// Translation logic
 function translatePage(lang) {
   document.querySelectorAll('[data-i18n-key]').forEach(el => {
     const key = el.getAttribute('data-i18n-key');
@@ -179,14 +182,64 @@ function translatePage(lang) {
   });
 }
 
-// Bind dropdown
+// Language dropdown listener
 const langSelector = document.getElementById('languageSelect');
 langSelector.addEventListener('change', () => translatePage(langSelector.value));
-// Initialize
 translatePage(langSelector.value);
 
+// Delete modal logic
+function openModal() { document.getElementById('deleteModal').style.display = 'flex'; }
+function closeModal() { document.getElementById('deleteModal').style.display = 'none'; }
+function confirmDelete() {
+  alert(translations[langSelector.value].deleteAcct + " ✓");
+  closeModal();
+}
+window.addEventListener('click', e => { if (e.target.id === 'deleteModal') closeModal(); });
 
+// Expertise management
+function bindExpertise(item) {
+  const inputs = Array.from(item.querySelectorAll('input, textarea'));
+  const editBtn = item.querySelector('.edit-btn');
+  const saveBtn = item.querySelector('.save-btn');
 
+  // Initial state
+  inputs.forEach(el => el.readOnly = true);
+  editBtn.style.display = 'inline-block';
+  saveBtn.style.display = 'none';
+
+  editBtn.onclick = () => {
+    inputs.forEach(el => el.readOnly = false);
+    inputs[0].focus();
+    editBtn.style.display = 'none';
+    saveBtn.style.display = 'inline-block';
+  };
+
+  saveBtn.onclick = () => {
+    inputs.forEach(el => el.readOnly = true);
+    saveBtn.style.display = 'none';
+    editBtn.style.display = 'inline-block';
+  };
+}
+
+// Initialize existing items and bind
+document.querySelectorAll('.expertise-item').forEach(bindExpertise);
+
+// Add new expertise item
+document.getElementById('addExpertiseBtn').addEventListener('click', () => {
+  const container = document.getElementById('expertise-container');
+  const div = document.createElement('div');
+  div.className = 'expertise-item';
+  div.innerHTML = `
+    <div class="field-group"><label>Subject:</label><input type="text" placeholder="Subject"></div>
+    <div class="field-group"><label>Topic:</label><input type="text" placeholder="Topic"></div>
+    <div class="field-group"><label>Description:</label><textarea placeholder="Description"></textarea></div>
+    <div class="expertise-controls">
+      <button type="button" class="edit-btn" style="display:none;">Edit</button>
+      <button type="button" class="save-btn">Save</button>
+    </div>`;
+  container.appendChild(div);
+  bindExpertise(div);
+});
 
 
   </script>
