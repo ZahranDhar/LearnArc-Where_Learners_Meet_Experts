@@ -1,0 +1,105 @@
+
+body {
+    font-family: sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+#chat-container {
+    width: 100%;
+    height: 100%;
+    margin: 10px auto;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+}
+
+#chat-header {
+    display: flex;
+    align-items: center;
+    background-color: #c1a5f1;
+    padding: 15px 20px;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 0 4px 8px #ffffff;
+    color: #ffffff;
+    height:50px;
+}
+
+#chat-header img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background-image: url('../webimages/WhatsApp\ Image\ 2025-06-21\ at\ 7.39.29\ PM.jpeg'); 
+
+}
+
+.message {
+    max-width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    position: relative;
+    clear: both;
+}
+
+.sent {
+    background-color: #d1e7dd;
+    float: right;
+    text-align: right;
+}
+
+.received {
+    background-color: #f8d7da;
+    float: left;
+    text-align: left;
+}
+
+.timestamp {
+    font-size: 0.8em;
+    color: #555;
+    display: block;
+    margin-top: 5px;
+}
+
+#chat-input {
+    display: flex;
+    border-top: 1px solid #f6f5f7;
+}
+
+#chat-input input {
+    flex: 1;
+    padding: 15px 20px;
+    width: 50px;
+    height:40px;
+    border-radius: 25px;
+    border: 2px solid #c1a5f1;
+    background-color: #f7f3ff;
+    font-size: 16px;
+    color: #5b448f;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(193, 165, 241, 0.2);
+}
+
+#chat-input button {
+    background-color: #c1a5f1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(193, 165, 241, 0.4);
+}
