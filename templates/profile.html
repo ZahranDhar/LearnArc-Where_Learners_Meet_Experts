@@ -22,36 +22,57 @@
 
   <div class="profile-container">
     <aside class="left-sidebar">
-      <button class="active">My Profile</button>
+      <button class="active" >My Profile</button>
       <ul>
-        <li><a href="#">Change Password</a></li>
-        <li><a href="#">Languages</a></li>
+        <li><a href="../templates/change_password.html">Change Password</a></li>
+  <section class="language-selector"><li style="color: dodgerblue;">Languages</li></section>
+  <div class="custom-select">
+    <select id="languageSelect" style="color: mediumpurple;">
+      <option value="en" selected>English</option>
+      <option value="hi">हिन्दी</option>
+    </select>
+  </div>
+</section>
+
         <li><a href="#">Privacy</a></li>
         <li><a href="#">Help</a></li>
         <li><a href="#">Log Out</a></li>
       </ul>
-      <a class="delete" href="#">Delete Account</a>
+      <button onclick="openModal()" class="delete-account-btn" data-i18n-key="deleteAcct">Delete Account</button>
+
+<div id="deleteModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 data-i18n-key="deleteTitle">Delete Account</h2>
+    <p data-i18n-key="deleteConfirm">Are you sure you want to delete your account? This action cannot be undone.</p>
+    <div class="modal-buttons">
+      <button type="button" class="cancel-btn"data-i18n-key="cancelBtn" onclick="closeModal()">Cancel</button>
+      <button type="button" class="delete-btn"data-i18n-key="confirmBtn" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
     </aside>
 
     <main class="profile-main">
       <div class="profile-header">
         <div class="avatar"></div>
         <div class="userinfo">
-          <h2>Username</h2>
-          <p>Niche</p>
+          <h2 data-i18n-key="username">Username</h2>
+          <p data-i18n-key="niche">Niche</p>
         </div>
-        <a href="#" class="edit-profile">Edit Profile</a>
+        <a href="#" class="edit-profile" data-i18n-key="editProfile">Edit Profile</a>
       </div>
 
      <section class="personal-info">
-  <h3>Personal Information</h3>
+  <h3 data-i18n-key="personalInfo">Personal Information</h3>
   <form>
     <div class="row">
-      <label style="margin-top: 8px;"><b>First name:</b></label>
+      <label style="margin-top: 8px;"><b data-i18n-key="firstNameLabel">First name:</b></label>
       <input type="text"  placeholder="First Name" readonly value="BEHZAD" />
-      <label style="margin-top: 8px;"><b>Last name:</b></bLast></label>
+      <label style="margin-top: 8px;"><b data-i18n-key="lastNameLabel">Last name:</b></bLast></label>
       <input type="text" placeholder="Last Name" readonly value="AYOUB" />
-      <label style="margin-top: 8px;"><b>Age:</b></label>
+      <label style="margin-top: 8px;"><b data-i18n-key="ageLabel">Age:</b></label>
       <input type="text" placeholder="Age" readonly value="20" />
     </div>
     <div class="row add-niche">
@@ -88,6 +109,86 @@
       };
       fileInput.click();
     });
+
+    
+    function openModal() {
+  document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+}
+
+function confirmDelete() {
+  // TODO: Implement the delete action (e.g., form submission or backend request)
+  alert('Your account has been deleted.');
+  closeModal();
+}
+
+// Close when clicking outside the modal box
+window.onclick = event => {
+  if (event.target.id === 'deleteModal') closeModal();
+};
+
+
+  // document.getElementById('languageSelect').addEventListener('change', e => {
+  //   const lang = e.target.value;
+  //   alert(`Language changed to: ${lang.toUpperCase()}`);
+  //   // TODO: integrate backend or i18n logic
+  // });
+
+ 
+
+const translations = {
+  en: {
+    username: "Username",
+    niche: "Niche",
+    editProfile: "Edit Profile",
+    firstNameLabel: "First name:",
+    lastNameLabel: "Last name:",
+    ageLabel: "Age:",
+    personalInfo: "Personal Information",
+    deleteAcct: "Delete Account",
+    deleteTitle: "Delete Account",
+    deleteConfirm: "Are you sure you want to delete your account? This action cannot be undone.",
+    cancelBtn: "Cancel",
+    confirmBtn: "Delete"
+  },
+  hi: {
+    username: "उपयोगकर्ता नाम",
+    niche: "विशेषता",
+    editProfile: "प्रोफ़ाइल संपादित करें",
+    firstNameLabel: "पहला नाम:",
+    lastNameLabel: "अंतिम नाम:",
+    ageLabel: "उम्र:",
+    personalInfo: "व्यक्तिगत जानकारी",
+    deleteAcct: "खाता हटाएं",
+    deleteTitle: "खाता हटाएं",
+    deleteConfirm: "क्या आप वाकई अपना खाता हटाना चाहते हैं? यह कार्रवाई पूर्ववत नहीं हो सकती।",
+    cancelBtn: "रद्द करें",
+    confirmBtn: "हटाएं"
+  }
+};
+
+function translatePage(lang) {
+  document.querySelectorAll('[data-i18n-key]').forEach(el => {
+    const key = el.getAttribute('data-i18n-key');
+    if (translations[lang]?.[key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+}
+
+// Bind dropdown
+const langSelector = document.getElementById('languageSelect');
+langSelector.addEventListener('change', () => translatePage(langSelector.value));
+// Initialize
+translatePage(langSelector.value);
+
+
+
+
+
   </script>
 </body>
 </html>
