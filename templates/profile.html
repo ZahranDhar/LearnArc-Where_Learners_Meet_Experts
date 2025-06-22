@@ -9,13 +9,13 @@
 <body>
   <header>
     <div class="logo"><img src="../static/webimages/learnarc.jpg" alt="LearnArc Logo"/></div>
-    <div class="search-container"><input type="text" placeholder="Search Bar"/></div>
+    <!-- <div class="search-container"><input type="text" placeholder="Search Bar"/></div> -->
     <nav class="main-nav">
       <a href="../templates/Home.html">Home</a>
-      <a href="#" class="active">Profile</a>
+      <a href="#" class="active" style="background-color: dodgerblue;color: whiTE;">Profile</a>
       <a href="#">Chats</a>
       <a href="#">Search</a>
-      <a href="#">About Us</a>
+      <a href="#" style="margin-left: 480px;">About Us</a>
       <a href="#">Contact</a>
     </nav>
   </header>
@@ -43,29 +43,32 @@
         <a href="#" class="edit-profile">Edit Profile</a>
       </div>
 
-      <section class="personal-info">
-        <h3>Personal Information</h3>
-        <form>
-          <div class="row">
-            <input type="text" placeholder="First Name"/>
-            <input type="text" placeholder="Last Name"/>
-            <input type="text" placeholder="Age"/>
-          </div>
-          <div class="row add-niche">
-            <div id="niche-container">
-              <input type="text" name="niche" placeholder="Add Niche"/>
-            </div>
-            <button id="addNicheBtn" type="button">+</button>
-          </div>
-        </form>
-      </section>
+     <section class="personal-info">
+  <h3>Personal Information</h3>
+  <form>
+    <div class="row">
+      <label style="margin-top: 8px;"><b>First name:</b></label>
+      <input type="text"  placeholder="First Name" readonly value="BEHZAD" />
+      <label style="margin-top: 8px;"><b>Last name:</b></bLast></label>
+      <input type="text" placeholder="Last Name" readonly value="AYOUB" />
+      <label style="margin-top: 8px;"><b>Age:</b></label>
+      <input type="text" placeholder="Age" readonly value="20" />
+    </div>
+    <div class="row add-niche">
+      <div id="niche-container">
+        <textarea >TIME COMPLEXITY (DAA)/COMPUTER SCIENCE</textarea>
+      </div>
+      <button id="addNicheBtn" type="button">+</button>
+    </div>
+  </form>
+</section>
+
     </main>
   </div>
 
   <script>
     document.getElementById('addNicheBtn').addEventListener('click', () => {
-      const input = document.createElement('input');
-      input.type = 'text';
+      const input = document.createElement('textarea');
       input.name = 'niche';
       input.placeholder = 'Add Niche';
       document.getElementById('niche-container').appendChild(input);
