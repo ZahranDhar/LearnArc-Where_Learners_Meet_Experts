@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect, url_for
+from flask import Flask, request, render_template, session, redirect, url_for, jsonify
 import os
 import bcrypt
 import boto3
@@ -88,7 +88,7 @@ def logIn():
 @app.route('/add', methods=['POST'])
 def addExpertise():
 
-    result=expertises.insert_one({"course":request.form['course'],"title":request.form['title'],"description":request.form['description'],"rating":0})
+    result=expertises.insert_one({"username":session.get('username'),"course":request.form['course'],"title":request.form['title'],"description":request.form['description']})
     profiles.update_one({"username":session.get('username')},{"$push":{"expertiseIDs":result.inserted_id}})
 
     return render_template('home.html')
@@ -222,14 +222,47 @@ def get_room_name(user1, user2):
     return "-".join(sorted([user1, user2]))
 
 # Display Profile (Visiting and Personal)
-@app.route('/profile/<username>',methods=['POST'])
-def getProfile(username):
+@app.route('/profile',methods=['POST'])
+def getProfile():
 
     # Retrieve user data from MongoDB
-    user=profiles.find_one({"username":username})
-    expertiseIDs=user.get("expertiseIDs",[])
-    expertises=list(expertises.find({"_id":{"$in":expertiseIDs}}))
-    return render_template("profile.html",user=user,expertises=expertises)
+    user=profiles.find_one({"username":request.args.get('username')})
+    user['_id']=str(user['_id'])
+
+    issideprofile=request.args.get('isSideProfile').lower()=='true'
+    if(issideprofile==False):
+        expertiseIDs=user.get("expertiseIDs",[])
+        expertiseList=list(expertises.find({"_id":{"$in":expertiseIDs}}))
+
+
+        for expertise in expertiseList:
+            expertise['_id'] = str(expertise['_id'])
+
+        return jsonify({
+        "expertiseList": expertiseList,
+        "user": user
+        })
+    
+    return jsonify(user)
+
+# Display searched/course expertises
+@app.route('/search',methods=['GET'])
+def displaySearch():
+    iscourse=request.args.get('isCourse').lower()=='true'
+
+    if(iscourse):
+        expertiseList=list(expertises.find({"course":request.args.get('courseName')}))
+    else:
+        expertiseList=list(expertises.find({"title":request.args.get('expertiseTitle')}))
+
+    for expertise in expertiseList:
+      expertise['_id'] = str(expertise['_id'])
+
+    return jsonify(expertiseList)
+
+
+
+
 
 
 # Run the app
