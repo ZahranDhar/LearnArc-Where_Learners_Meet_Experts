@@ -1,101 +1,43 @@
 from flask import Flask, request, render_template, session, redirect, url_for, jsonify
-import os
-import bcrypt
-import boto3
-import certifi 
+import boto3 
 import datetime
 from pymongo import MongoClient
 from flask_socketio import SocketIO, emit, join_room
+from routes.Auth import AuthRoutes
+from routes.Profile import ProfileRoutes
+from routes.Expertise import  ExpertiseRoutes
+from routes.Search import SearchRoutes
+from routes.Welcome import WelcomeRoutes
 
 # Connecting to AWS Server
-s3 = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='', region_name='eu-north-1')
+s3 = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='', region_name='eu-north-1' )
+
 # Connecting to MongoDB
 client = MongoClient("")
 db = client["LearnArc-StorageMongoDB"]
-profiles = db["Profiles"]
-expertises = db["Expertises"]
 collection = db["Profiles"]
 users_col = db["Profiles"]     # Reference to users collection
 chats_col = db["Chats"]        # You should create this collection in MongoDB
 
-# Handle Open Website Request
+# Initializations
 app = Flask(__name__)
-app.secret_key = ''
-socketio = SocketIO(app)  # Enables SocketIO support
+app.secret_key= ''
+socketio = SocketIO(app)
 
-#routes
+# Initializing Routes
+WelcomeRoutes(app)
+AuthRoutes(app,db,s3)
+ProfileRoutes(app,db)
+ExpertiseRoutes(app,db)
+SearchRoutes(app,db)
 
-@app.route('/')
-def welcome():
-
-    return render_template("welcome.html")
-
-
-# Handle Signup Request 
-@app.route('/signup')
-def signup_page():
-    return render_template("signup.html")
-
-@app.route('/login')
-def login_page():
-    return render_template("login.html")
-
-# Uploads Profile picture to AWS
-def uploadProfilePictureToAWS(fileObj):
-
-    fileName = f"profile_pictures/{fileObj.filename}"
-    bucketName = 'learnarc-storageaws'
-    s3.upload_fileobj(fileObj, bucketName, fileName, ExtraArgs={'ContentType': fileObj.content_type})
-
-    return f"https://{bucketName}.s3.amazonaws.com/{fileName}"
-
-# Uploads Data to Databases
-@app.route('/signUp', methods=['POST'])
-def signUp():
-
-    # Check if username is available
-    if(profiles.find_one({"username":request.form['username']}) is not None):
-        return render_template('signup.html')
-
-    # Secure Password
-    securepassword = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
-
-    # Upload Profile Picture to AWS
-    file = request.files['profilepicture']
-    if file:
-        url = uploadProfilePictureToAWS(file)
-
-    profiles.insert_one({"name": request.form['name'], "username": request.form['username'],"age": request.form['age'],"securepassword": securepassword,"profilepictureurl": url,"expertiseIDs":[], "chatUsernames":[]})
-    user=profiles.find_one({"username":request.form['username']})
-    session['username']=request.form['username']
-    return render_template('Home.html',user=user)
-
-@app.route('/login',methods=['POST'])
-def logIn():
-
-    # Verify Password
-    if(profiles.find_one({"username":request.form['username']}) is not None):
-
-        user=profiles.find_one({"username":request.form['username']})    
-
-        if(bcrypt.checkpw(request.form['password'].encode('utf-8'), user.get("securepassword"))):
-            
-            session['username']=request.form['username']
-            return render_template('Home.html',user=user)
-            return render_template("login.html")
-        
-
-@app.route('/add', methods=['POST'])
-def addExpertise():
-
-    result=expertises.insert_one({"username":session.get('username'),"course":request.form['course'],"title":request.form['title'],"description":request.form['description']})
-    profiles.update_one({"username":session.get('username')},{"$push":{"expertiseIDs":result.inserted_id}})
-
-    return render_template('home.html')
-
+# Chat route
 @app.route('/chat/<friend_username>')
 def chat(friend_username):
-    
+    # Simulate login (for testing)
+    if 'username' not in session:
+        session['username'] = 'aidahrufai'  # 👈 Replace with valid test user
+
     # Get the current logged-in user
     current_user = users_col.find_one({"username": session['username']})
     if not current_user:
@@ -158,35 +100,6 @@ def home():
 
     return render_template('Home.html', current_user=current_user, users=all_users)
 
-#chat menu
-@app.route('/chat_menu')
-def chat_menu():
-    if 'username' not in session:
-        return redirect(url_for('welcome'))
-
-    current_username = session['username']
-
-    # Fetch all chats involving current user
-    conversations = chats_col.find({
-        "$or": [
-            {"sender": current_username},
-            {"receiver": current_username}
-        ]
-    })
-
-    talked_to = set()
-    for convo in conversations:
-        if convo['sender'] != current_username:
-            talked_to.add(convo['sender'])
-        if convo['receiver'] != current_username:
-            talked_to.add(convo['receiver'])
-
-    if not talked_to:
-        talked_to_users = []
-    else:
-        talked_to_users = list(users_col.find({"username": {"$in": list(talked_to)}}))
-
-    return render_template('chat_menu.html', users=talked_to_users, current_user=current_username)
 # WebSocket Events
 @socketio.on('join_chat')
 def on_join(data):
@@ -221,50 +134,8 @@ def handle_send_message(data):
 def get_room_name(user1, user2):
     return "-".join(sorted([user1, user2]))
 
-# Display Profile (Visiting and Personal)
-@app.route('/profile',methods=['POST'])
-def getProfile():
-
-    # Retrieve user data from MongoDB
-    user=profiles.find_one({"username":request.args.get('username')})
-    user['_id']=str(user['_id'])
-
-    issideprofile=request.args.get('isSideProfile').lower()=='true'
-    if(issideprofile==False):
-        expertiseIDs=user.get("expertiseIDs",[])
-        expertiseList=list(expertises.find({"_id":{"$in":expertiseIDs}}))
-
-
-        for expertise in expertiseList:
-            expertise['_id'] = str(expertise['_id'])
-
-        return jsonify({
-        "expertiseList": expertiseList,
-        "user": user
-        })
-    
-    return jsonify(user)
-
-# Display searched/course expertises
-@app.route('/search',methods=['GET'])
-def displaySearch():
-    iscourse=request.args.get('isCourse').lower()=='true'
-
-    if(iscourse):
-        expertiseList=list(expertises.find({"course":request.args.get('courseName')}))
-    else:
-        expertiseList=list(expertises.find({"title":request.args.get('expertiseTitle')}))
-
-    for expertise in expertiseList:
-      expertise['_id'] = str(expertise['_id'])
-
-    return jsonify(expertiseList)
-
-
-
-
-
-
 # Run the app
 if __name__ == '__main__':
     socketio.run(app, debug=True)
+
+
