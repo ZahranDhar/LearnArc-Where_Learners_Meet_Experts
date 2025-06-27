@@ -1,0 +1,147 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+body, html {
+  height: 100%;
+  background: #f7f2fc;
+}
+
+/* Header / Top Navbar */
+.topnav {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 10px 10px;
+  border-bottom: 1px solid #c2a0e6;
+}
+.logo-header img {
+  height: 50px;
+  margin-right: 16px;
+}
+.main-nav a {
+  text-decoration: none;
+  margin-right: 12px;
+  padding: 20px 20px;
+  color: black;
+  border-radius: 1px;
+  transition: background 0.2s;
+}
+.main-nav a.active {
+  background: dodgerblue;
+  color: white;
+}
+.main-nav a:hover {
+  background: #ddd;
+  color: black;
+}
+
+/* Search input & clear button */
+#searchInput {
+  flex: 1;
+  margin: 0 10px;
+  padding: 6px 8px;
+  font-size: 15px;
+  border: 1px solid #c2a0e6;
+  border-radius: 4px;
+}
+#clearBtn {
+  padding: 6px;
+  background: #cab0e7;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Layout: Sidebar + Main */
+.container {
+  display: flex;
+  height: calc(100% - 60px); /* header height */
+}
+
+/* Subjects sidebar */
+.subjects {
+    font-size: x-large;
+  width: 200px;
+  background: white;
+  border-right: 1px solid #c2a0e6;
+  overflow-y: auto;
+}
+.subjects ul {
+  list-style: none;
+}
+.subjects li {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: black;
+}
+.subjects li:hover,
+.subjects li.active {
+  background: dodgerblue;
+}
+
+/* Topics grid */
+.topics-grid {
+  flex: 1;
+  padding: 20px;
+  background: #d8b2ff;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+.topics-grid .placeholder {
+  color: black;
+  font-style: italic;
+  font-size: x-large;
+}
+
+/* Card styling */
+.card {
+  background: #fff;
+  border: 1px solid #d1b3f2;
+  border-radius: 6px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.card-header {
+  margin-bottom: 8px;
+}
+.card-subject {
+  font-size: 0.85rem;
+  color: #5e3b7b;
+  font-weight: bold;
+}
+.card-title {
+  margin: 6px 0;
+  font-size: 1.1rem;
+  color: #2b006a;
+}
+.card-desc {
+  flex: 1;
+  margin-bottom: 12px;
+  color: #4a2a5a;
+}
+.card-user {
+  font-size: 0.9rem;
+  color: #5e3b7b;
+  margin-bottom: 12px;
+}
+.chat-btn {
+  align-self: flex-end;
+  padding: 6px 12px;
+  background: dodgerblue;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.chat-btn:hover {
+  background: #0e61d0;
+}

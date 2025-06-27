@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Search Explorer – LearnArc</title>
+  <link rel="stylesheet" href="../static/css/search.css"/>
+</head>
+<body>
+
+  <header class="topnav">
+    <div class="logo-header">
+      <img src="../static/webimages/learnarc.jpg" alt="LearnArc Logo" />
+    </div>
+    <nav class="main-nav">
+      <a href="../templates/Home.html">Home</a>
+      <a href="../templates/profile.html">Profile</a>
+      <a href="#">Chats</a>
+      <a href="#" style="background-color: dodgerblue; color: white;" class="active">Search</a>
+     <input type="search" id="searchInput" placeholder="Search subjects…" style="width: 350px;">
+    <button id="clearBtn">✕</button>
+      <a href="#" style="margin-left: 46px;">About Us</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <aside class="subjects">
+      <ul id="subjectList"></ul>
+    </aside>
+
+    <main class="topics-grid">
+      <p class="placeholder">SELECT a SUBJECTS to view TOPICS.</p>
+    </main>
+  </div>
+
+  <script>
+    function loadTopics() {
+      return JSON.parse(localStorage.getItem('niches') || '[]');
+    }
+
+    const subjectList = document.getElementById("subjectList");
+    const topicsGrid  = document.querySelector(".topics-grid");
+    const searchInput = document.getElementById("searchInput");
+    const clearBtn    = document.getElementById("clearBtn");
+
+    function renderSubjects(filter = "") {
+      const topics = loadTopics();
+      const lf = filter.toLowerCase();
+
+      const subjectMap = new Map();
+      topics.forEach(t => {
+        const key = t.subject.toLowerCase();
+        if (!subjectMap.has(key)) subjectMap.set(key, t.subject);
+      });
+
+      const subjects = Array.from(subjectMap.values())
+        .filter(s => s.toLowerCase().includes(lf));
+
+      subjectList.innerHTML = "";
+      subjects.forEach(subject => {
+        const li = document.createElement("li");
+        li.textContent = subject;
+        li.onclick = () => selectSubject(subject, li);
+        subjectList.appendChild(li);
+      });
+
+      topicsGrid.innerHTML = `<p class="placeholder">Select a subject to view topics.</p>`;
+    }
+
+    function selectSubject(subject, clickedLi) {
+      Array.from(subjectList.children).forEach(li =>
+        li.classList.toggle("active", li === clickedLi)
+      );
+
+      const filtered = loadTopics()
+        .filter(t => t.subject.toLowerCase() === subject.toLowerCase());
+
+      topicsGrid.innerHTML = filtered.map(t => `
+        <div class="card" data-user="${t.user}">
+          <div class="card-header">
+            <span class="card-subject">${t.subject}</span>
+          </div>
+          <h4 class="card-title">${t.title}</h4>
+          <p class="card-desc">${t.desc}</p>
+          <p class="card-user">By ${t.user}</p>
+          <button class="chat-btn">Chat</button>
+        </div>`).join("");
+
+      topicsGrid.querySelectorAll('.chat-btn').forEach(btn => {
+        btn.onclick = () => {
+          const owner = btn.closest('.card').dataset.user;
+          alert(`Starting chat with ${owner}…`);
+        };
+      });
+    }
+
+    searchInput.addEventListener("input", () => renderSubjects(searchInput.value.trim()));
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      renderSubjects();
+    });
+    window.addEventListener("storage", e => {
+      if (e.key === 'niches') renderSubjects(searchInput.value.trim());
+    });
+
+    renderSubjects();
+  </script>
+
+</body>
+</html>
