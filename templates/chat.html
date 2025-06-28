@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat with {{ friend.username }}</title>
+    <link rel="stylesheet" href="../static/css/chat.css" />
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-header">
+            <img src="{{ friend.profilepictureurl }}" alt="Profile Picture">
+            <h2>{{ friend.username }}</h2>
+        </div>
+
+        <div id="chat-box">
+            {% for msg in messages %}
+                <div class="message {% if msg.sender == current_user.username %}sent{% else %}received{% endif %}">
+                    <p>{{ msg.message }}</p>
+                    <span class="timestamp">{{ msg.timestamp.strftime('%H:%M') }}</span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="chat-input">
+            <input type="text" id="message" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+
+        const sender = "{{ current_user.username }}";
+        const receiver = "{{ friend.username }}";
+
+        socket.on('connect', () => {
+            socket.emit('join_chat', { sender: sender, receiver: receiver });
+        });
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message');
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            socket.emit('send_message', {
+                sender: sender,
+                receiver: receiver,
+                message: message
+            });
+
+            messageInput.value = '';
+        }
+
+        socket.on('receive_message', (data) => {
+            const chatBox = document.getElementById('chat-box');
+
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message');
+            msgDiv.classList.add(data.sender === sender ? 'sent' : 'received');
+            msgDiv.innerHTML = `<p>${data.message}</p><span class="timestamp">${data.timestamp}</span>`;
+
+
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    </script>
+</body>
+</html>

@@ -12,10 +12,10 @@
   <header class="site-header" style="height: 12%;">
     <img src="../static/webimages/learnarc.jpg" alt="LEARNarc Logo" class="logo">
     <nav style="background-color: dodgerblue;margin-top: -40px;" class="auth-navL">
-      <a href="login.html">Login</a>
+      <a href="{{ url_for('signup_page') }}">Sign Up</a>
     </nav>
     <nav style="margin-top: -90px;background-color: #d8b2ff;" class="auth-navS">
-      <a href="signup.html">Signup</a>
+      <a href="{{ url_for('login_page') }}">Log In</a>
     </nav>
   </header>
 
