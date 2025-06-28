@@ -1,52 +1,180 @@
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
-body { background:mediumpurple; color:#333; }
+/* Reset & Base */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: #f4edff; color: #333; }
 
 /* Header */
-header { display:flex; align-items:center; padding:10px 30px; background:#fff; border-bottom:1px solid #ddd; }
-.logo img { height:50px; margin-right:20px; }
-.main-nav a { text-decoration:none; color:black; font-size:16px; padding: 23px 5px;}
-.main-nav :hover{ background-color: #ccc; width: 100px;}
-.main-nav a.active { background:dodgerblue; color:#fff; padding:25px 8px; }
+header {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.logo img { height: 50px; margin-right: 20px; }
+.main-nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 25px 20px;
+  margin-right: 1px;
+  border-radius: 1px;
+}
+.main-nav a.active {
+  background: dodgerblue;
+  color: #fff;
+}
+.main-nav a:hover {
+  background: #ddd;
+  color: black;
+}
 
 /* Layout */
-.profile-container { display:flex; margin-top:20px; }
-.left-sidebar { width:240px; background:#fff; padding:20px;background-image: url('../webimages/backgroundlogo.jpg');  }
-.left-sidebar button.active { width:100%; padding:10px; background:dodgerblue; color:#fff; border:none; border-radius:6px; margin-bottom:15px; }
-.left-sidebar ul { list-style:none; margin:20px 0;font-size: larger;font-weight: bold; }
-.left-sidebar ul :hover{ text-decoration: underline; color: dodgerblue;}
-.left-sidebar ul li { margin-bottom:12px; display:flex; align-items:center; }
-.left-sidebar ul a { text-decoration:none; color:black; }
-.left-sidebar ul select { margin-left: auto; padding:4px; }
-.delete-account-btn { width:100%; padding:10px; background:#e74c3c; color:#fff; border:none; border-radius:4px; cursor:pointer; }
+.profile-container { display: flex; margin: 20px; }
+
+/* Sidebar */
+.left-sidebar {
+  width: 240px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+.left-sidebar button.active {
+  width: 100%;
+  padding: 10px;
+  background: dodgerblue;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+.left-sidebar ul { list-style: none; margin-top: 10px; }
+.left-sidebar li {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+.left-sidebar li select {
+  margin-left: auto;
+}
+.left-sidebar li a {
+  text-decoration: none;
+  color: #333;
+}
+.left-sidebar li a:hover {
+  color: dodgerblue;
+}
+.delete-account-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
 /* Modal */
-.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; }
-.modal-content { background:#fff; padding:20px; border-radius:8px; width:360px; max-width:90%; text-align:center; position:relative; }
-.close { position:absolute; top:12px; right:12px; cursor:pointer; font-size:20px; }
-.modal-buttons { display:flex; gap:10px; margin-top:20px; }
-.cancel-btn, .delete-btn { flex:1; padding:10px; border:none; border-radius:6px; cursor:pointer; }
-.cancel-btn { background:#ccc; color:#333; }
-.delete-btn { background:#e74c3c; color:#fff; }
-
-/* Profile main */
-.profile-main { flex:1; background:#efe5ff; padding:20px; border-radius:10px; margin-left:20px; }
-.profile-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
-.avatar { width:80px; height:80px; background:#fff center/cover no-repeat; border:2px solid #ccc; border-radius:50%; }
-.userinfo h2 { color:#2b61da; font-size:20px; }
-.userinfo p { color:#9063e1; font-size:16px; }
-.edit-profile { font-size:14px; color:#8c5edf; text-decoration:none; }
-
-/* Personal info */
-.personal-info h3 { background:#a288e3; color:#fff; padding:8px 16px; border-radius:6px; display:inline-block; margin-bottom:16px; }
-.row { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-.row input[readonly] { background:#e9ecef; border:1px solid #aaa; padding:6px; border-radius:4px; }
-
-/* Expertise section */
-.field-group {
-  margin-bottom: 12px;
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 360px;
+  max-width: 90%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.modal-content .close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.modal-buttons {
+  margin-top: 20px;
   display: flex;
   gap: 10px;
+}
+.cancel-btn, .delete-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.cancel-btn { background: #ccc; color: #333; }
+.delete-btn { background: #e74c3c; color: #fff; }
+
+/* Main Profile Section */
+.profile-main {
+  flex: 1;
+  background: #efe5ff;
+  padding: 30px;
+  border-radius: 10px;
+}
+.profile-header {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: #fff center/cover no-repeat;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+}
+.userinfo h2 { color: #2b61da; font-size: 20px; }
+.userinfo p { color: #9063e1; font-size: 16px; }
+.edit-profile {
+  font-size: 14px;
+  color: #8c5edf;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.edit-profile:hover {
+  border-color: #8c5edf;
+}
+
+/* Personal Info */
+.personal-info h3 {
+  background: #a288e3;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.row input[readonly] {
+  background: #e9ecef;
+  border: 1px solid #aaa;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+/* Expertise Section */
+.expertise-section {
+  margin-top: 30px;
+}
+.field-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 .field-group label {
   width: 100px;
@@ -62,19 +190,6 @@ header { display:flex; align-items:center; padding:10px 30px; background:#fff; b
 }
 .field-group textarea { min-height: 60px; resize: vertical; }
 
-.expertise-controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.expertise-controls button {
-  padding: 6px 10px;
-  background: #4d7cfe;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
 #addExpertiseBtn {
   background: #0a6cff;
   color: #fff;
@@ -83,4 +198,22 @@ header { display:flex; align-items:center; padding:10px 30px; background:#fff; b
   border-radius: 4px;
   cursor: pointer;
 }
-
+.expertise-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.expertise-controls button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.edit-btn, .save-btn {
+  background: #4d7cfe;
+  color: #fff;
+}
+.delete-btn {
+  background: #e74c3c;
+  color: #fff;
+}
