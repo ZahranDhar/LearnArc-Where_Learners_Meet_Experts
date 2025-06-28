@@ -16,7 +16,7 @@
     <nav class="top-nav">
       <a href="#" style="background-color: dodgerblue; color: white;">Home</a>
       <a href="../templates/profile.html">Profile</a>
-      <a href="#">Chats</a>
+      <a href="{{ url_for('chat_menu') }}">Chats</a>
       <a href="../templates/search.html">Search</a>
       <a href="#" style="margin-left: 40%;">About Us</a>
       <a href="#">Contact</a>
@@ -26,12 +26,13 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="profile">
-      <img src="../static/webimages/behzad.jpg" alt="Profile Photo">
-      <div class="name"><b>BEHZAD AYOUB</b></div><br><br>
-      <div class="username"><h2>@behzad123</h2></div><br>
-      <div class="age"><h2>Age: 20</h2> </div>
+      <img src="{{user.profilepictureurl}}" alt="Profile Photo">
+      <div class="name"><b>{{user.name}}</b></div><br><br>
+      <div class="username"><h2>{{user.username}}</h2></div><br>
+      <div class="age"><h2>Age: {{user.age}}</h2> </div>
     </div>
   </aside>
+
 
   <main id="main" class="main">
     <h1> <span style="color: indigo;">Learn</span><span style="color: dodgerblue;">Arc</span></h1>
@@ -65,7 +66,6 @@
       </a>
     </section>
   </main>
-
   <script>
     const btn = document.getElementById('toggleBtn');
     const sidebar = document.getElementById('sidebar');
@@ -78,5 +78,10 @@
     });
   </script>
 
+<script src="{{ url_for('static', filename='js/Home.js') }}"></script>
+
+
+
 </body>
 </html>
+
