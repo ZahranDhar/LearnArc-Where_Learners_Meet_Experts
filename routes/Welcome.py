@@ -4,6 +4,6 @@ class WelcomeRoutes:
   def __init__(self,app):
     
     # Welcome Page Route
-    @app.route('/',methods=['POST'])
+    @app.route('/',methods=['GET'])
     def welcome():
-      return render_template('welcome.html')
+      return render_template('login.html')

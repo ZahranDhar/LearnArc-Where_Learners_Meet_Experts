@@ -48,7 +48,7 @@ class AuthRoutes:
                 if(user and bcrypt.checkpw(request.form['password'].encode('utf-8'), user.get("securepassword").encode('utf-8'))):
                     
                     session['username']=request.form['username']
-                    return render_template('Home.html')
+                    return "SUCCESS"
                 else:
                     return render_template('login.html')
 
