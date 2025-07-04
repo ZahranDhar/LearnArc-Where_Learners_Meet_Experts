@@ -1,0 +1,159 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F9FAFB;
+  color: #1F2937;
+}
+
+.profile-container {
+  max-width: 700px;
+  width: 100%;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: white;
+  border: none;
+  box-shadow: none;
+  
+}
+
+.top-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 30px;
+}
+.user-info {
+ padding: 6px 10px;
+  font-size: 14px;
+ 
+}
+
+.user-info h2 {
+  color: #7C3AED;
+  margin-bottom: 10px;
+}
+
+.expertise-section h3,
+.ratings-section h3 {
+  color: #38BDF8;
+  margin-bottom: 10px;
+}
+
+.expertise-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.expertise-section li {
+  background-color: #E0F2FE;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.ratings-section .rating p {
+  margin: 6px 0;
+}
+
+.chat-section {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.chat-section button {
+  background-color: #7C3AED;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.chat-section button:hover {
+  background-color: #6B21A8;
+}
+
+.profile-photo-box {
+  width: 140px;
+  height: 140px;
+  border: 2px dashed #7C3AED;
+  border-radius: 12px;
+  display: flex;
+  justify-content: end;
+  flex-wrap: wrap;
+  align-items: center;
+  color: #7C3AED;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  background-color: #F3F4F6;
+  transition: background-color 0.3s;
+  
+  
+}
+
+.profile-photo-box:hover {
+  background-color: #EDE9FE;
+}
+
+.profile-photo-box input[type="file"] {
+  display: none;
+}
+
+.expertise-section textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px;
+  font-size: 15px;
+  border: 2px solid #7C3AED;
+  border-radius: 10px;
+  resize: vertical;
+  background-color: #F9FAFB;
+  color: #1F2937;
+}
+eader {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.logo img { height: 50px; margin-right: 20px; }
+.main-nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 25px 20px;
+  margin-right: 1px;
+  border-radius: 1px;
+}
+.main-nav a.active {
+  background: dodgerblue;
+  color: #fff;
+}
+.main-nav a:hover {
+  background: #ddd;
+  color: black;
+}
+.expertise-box {
+  background-color: #E0F2FE;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.expertise-box h4 {
+  margin: 0 0 8px;
+  color: #2563EB; /* Blue */
+  font-size: 16px;
+}
+
+.expertise-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #374151; /* Darker text */
+}
