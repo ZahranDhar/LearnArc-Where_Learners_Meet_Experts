@@ -35,7 +35,7 @@ class AuthRoutes:
         
         session['username']=request.form['username']
         
-        return render_template('Home.html')
+        return "SUCCESS"
       
       # Login Route
       @app.route('/login',methods=['POST'])
