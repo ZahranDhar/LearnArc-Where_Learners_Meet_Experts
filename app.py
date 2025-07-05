@@ -10,10 +10,13 @@ from routes.Expertise import  ExpertiseRoutes
 from routes.Search import SearchRoutes
 from routes.Welcome import WelcomeRoutes
 from routes.chat import ChatRoutes
-# Connecting to AWS Server
+from routes.chatlist import ChatListRoutes
+
+# # Connecting to AWS Server
 s3 = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='', region_name='eu-north-1' )
 
 # Connecting to MongoDB
+client = MongoClient("")
 client = MongoClient("")
 db = client["LearnArc-StorageMongoDB"]
 collection = db["Profiles"]
@@ -32,6 +35,8 @@ ProfileRoutes(app,db)
 ExpertiseRoutes(app,db)
 SearchRoutes(app,db)
 ChatRoutes(app,db,socketio)
+ChatListRoutes(app, db)
+
 
 @app.route('/home')
 def home():
@@ -49,6 +54,7 @@ def home():
 # Run the app
 if __name__ == '__main__':
     socketio.run(app, debug=True)
+
 
 
 

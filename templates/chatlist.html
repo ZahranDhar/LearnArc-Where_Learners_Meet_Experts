@@ -1,0 +1,14 @@
+<!-- templates/chatlist.html -->
+
+<h2>Recent Chats</h2>
+<ul>
+  {% for partner in chat_partners %}
+    <li>
+      <a href="/chat/{{ partner.username }}">
+        <strong>{{ partner.username }}</strong>
+      </a>
+      <br>
+      <small>Last message: {{ partner.last_message }}</small>
+    </li>
+  {% endfor %}
+</ul>
